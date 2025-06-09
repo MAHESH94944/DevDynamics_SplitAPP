@@ -17,7 +17,7 @@ function validateExpenseInput(data) {
   if (!Array.isArray(data.splits) || data.splits.length === 0) {
     return "At least one split is required";
   }
-  // Single-person expense is allowed, but must match sum rules
+
   let totalSplit = 0;
   for (const split of data.splits) {
     if (typeof split.person !== "string" || !split.person.trim()) {
@@ -31,14 +31,14 @@ function validateExpenseInput(data) {
     }
     totalSplit += split.share;
   }
-  // For 'exact' and 'equal', total split should match amount
+
   if (
     ["exact", "equal"].includes(data.split_type) &&
     Math.abs(totalSplit - data.amount) > 0.01
   ) {
     return "Split shares do not add up to total amount";
   }
-  // For 'percentage', total should be 100
+
   if (data.split_type === "percentage" && Math.abs(totalSplit - 100) > 0.01) {
     return "Split percentages must add up to 100";
   }
