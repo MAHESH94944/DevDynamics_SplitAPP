@@ -6,14 +6,34 @@ const asyncHandler = (fn) => (req, res, next) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 
+function isStringArray(arr) {
+  return Array.isArray(arr) && arr.every((x) => typeof x === "string");
+}
 
 exports.addExpense = asyncHandler(async (req, res, next) => {
-  const error = validateExpenseInput(req.body);
+  let { amount, description, paid_by, split_type, splits } = req.body;
+
+  // If split_type is "equal" and splits is missing or is an array of people (strings), auto-generate splits
+  if (split_type === "equal" && (isStringArray(splits) || !splits)) {
+    let peopleArr = splits;
+    if (!Array.isArray(peopleArr) || !peopleArr.length) {
+      // If not provided, default to paid_by only
+      peopleArr = [paid_by];
+    }
+    const perPerson = Number((amount / peopleArr.length).toFixed(2));
+    splits = peopleArr.map((person) => ({
+      person: person.trim(),
+      share: perPerson,
+    }));
+    req.body.splits = splits;
+  }
+
+  const error = validateExpenseInput({ ...req.body, splits });
   if (error) {
     res.status(400);
     return next(new Error(error));
   }
-  const { amount, description, paid_by, split_type, splits } = req.body;
+
   const expense = await Expense.create({
     amount,
     description: description.trim(),
