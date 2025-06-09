@@ -13,11 +13,10 @@ function isStringArray(arr) {
 exports.addExpense = asyncHandler(async (req, res, next) => {
   let { amount, description, paid_by, split_type, splits } = req.body;
 
-  // If split_type is "equal" and splits is missing or is an array of people (strings), auto-generate splits
   if (split_type === "equal" && (isStringArray(splits) || !splits)) {
     let peopleArr = splits;
     if (!Array.isArray(peopleArr) || !peopleArr.length) {
-      // If not provided, default to paid_by only
+        
       peopleArr = [paid_by];
     }
     const perPerson = Number((amount / peopleArr.length).toFixed(2));
@@ -68,7 +67,6 @@ exports.updateExpense = asyncHandler(async (req, res, next) => {
 
   let { amount, paid_by, split_type, splits } = req.body;
 
-  // Auto-generate splits for equal split if splits is an array of people (strings) or missing
   if (split_type === "equal" && (isStringArray(splits) || !splits)) {
     let peopleArr = splits;
     if (!Array.isArray(peopleArr) || !peopleArr.length) {
