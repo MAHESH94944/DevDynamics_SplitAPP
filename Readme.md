@@ -1,6 +1,6 @@
 # 💸 Split App - DevDynamics Internship Backend Assignment
 
-This project is a backend system designed to help groups of people split expenses fairly and calculate settlements. It's inspired by apps like Splitwise and solves problems like roommates sharing utility bills or friends managing trip expenses.
+> ⚠️ **Note:** This project is deployed on a free hosting tier (Render). As a result, the server may take 30–60 seconds to wake up if it's been idle. Please be patient when accessing the API for the first time.
 
 ---
 
@@ -25,6 +25,7 @@ https://split-app-backend-zj9k.onrender.com/api/expenses
 ## 📁 Features
 
 ### ✅ Core Features
+
 - Add, update, and delete expenses
 - Equal, exact, and percentage splits
 - Automatic person detection from expenses
@@ -33,6 +34,7 @@ https://split-app-backend-zj9k.onrender.com/api/expenses
 - Input validation and clear error handling
 
 ### 🧪 Edge Cases Handled
+
 - Negative/zero amounts
 - Missing required fields
 - Invalid updates/deletes
@@ -49,12 +51,14 @@ npm install
 ```
 
 Create a `.env` file:
+
 ```ini
 PORT=5000
 MONGODB_URI=your-mongodb-atlas-uri
 ```
 
 Then run the server:
+
 ```bash
 npm start
 ```
@@ -68,6 +72,7 @@ npm start
 - **POST /api/expenses**  
   Create a new expense  
   Example:
+
   ```json
   {
     "amount": 600,
@@ -77,6 +82,7 @@ npm start
     "splits": ["Shantanu", "Sanket", "Om"]
   }
   ```
+
   - For `"exact"` or `"percentage"` splits, use:
     ```json
     {
@@ -117,11 +123,13 @@ npm start
 ## 🔁 Sample Test Data
 
 Tested with these users:
+
 - Shantanu
 - Sanket
 - Om
 
 Test Expenses:
+
 - Dinner - ₹600 (Shantanu)
 - Groceries - ₹450 (Sanket)
 - Petrol - ₹300 (Om)
@@ -135,6 +143,7 @@ Test Expenses:
 - [View on GitHub Gist](https://gist.github.com/MAHESH94944/9e994d7bfe482643b8b7b43de1496168)
 
 This collection includes:
+
 - All endpoint examples
 - Test data setup
 - Edge case handling
@@ -156,4 +165,3 @@ This project was submitted as part of the DevDynamics Backend Internship Assignm
 ---
 
 **For any questions or follow-up, contact: [maheshjadhao172@gmail.com](mailto:maheshjadhao172@gmail.com)**
-
