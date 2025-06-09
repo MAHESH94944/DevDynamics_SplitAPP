@@ -10,10 +10,13 @@ Build a backend system that helps groups of people split expenses fairly and cal
 
 ---
 
-## 🚀 Live Demo
+## 🌐 Live Demo
 
-**Backend API:**  
-https://split-app-backend-zj9k.onrender.com/api/expenses
+🖥️ **Frontend UI**:  
+[https://split-app-frontend.onrender.com](https://split-app-frontend.onrender.com)
+
+🛠️ **Backend API**:  
+[https://split-app-backend-zj9k.onrender.com/api/expenses](https://split-app-backend-zj9k.onrender.com/api/expenses)
 
 ---
 
