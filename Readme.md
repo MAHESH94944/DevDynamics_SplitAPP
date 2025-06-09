@@ -1,6 +1,12 @@
-# 💸 Split App - DevDynamics Internship Backend Assignment
+# 💸 Split App - Backend Assignment
 
 > ⚠️ **Note:** This project is deployed on a free hosting tier (Render). As a result, the server may take 30–60 seconds to wake up if it's been idle. Please be patient when accessing the API for the first time.
+
+---
+
+## 📝 Problem Statement
+
+Build a backend system that helps groups of people split expenses fairly and calculate who owes money to whom. Think of scenarios like roommates splitting utility bills, friends sharing dinner costs, or travel buddies managing trip expenses.
 
 ---
 
