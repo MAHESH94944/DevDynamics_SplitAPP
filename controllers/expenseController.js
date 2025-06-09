@@ -65,11 +65,29 @@ exports.updateExpense = asyncHandler(async (req, res, next) => {
     res.status(400);
     return next(new Error("Invalid expense ID"));
   }
-  const error = validateExpenseInput(req.body);
+
+  let { amount, paid_by, split_type, splits } = req.body;
+
+  // Auto-generate splits for equal split if splits is an array of people (strings) or missing
+  if (split_type === "equal" && (isStringArray(splits) || !splits)) {
+    let peopleArr = splits;
+    if (!Array.isArray(peopleArr) || !peopleArr.length) {
+      peopleArr = [paid_by];
+    }
+    const perPerson = Number((amount / peopleArr.length).toFixed(2));
+    splits = peopleArr.map((person) => ({
+      person: person.trim(),
+      share: perPerson,
+    }));
+    req.body.splits = splits;
+  }
+
+  const error = validateExpenseInput({ ...req.body, splits });
   if (error) {
     res.status(400);
     return next(new Error(error));
   }
+
   const updated = await Expense.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
